@@ -25,7 +25,7 @@ module.exports = function (config) {
     crossOriginAttribute: true,
     coverageIstanbulReporter: {
       reports: [ 'html', 'lcovonly' ],
-      dir: '../../../build/reports/coverage',
+      dir: '/reports/coverage',
       fixWebpackSourcePaths: true,
       thresholds: {
         statements: 75, // Our test coverage goal 75%
