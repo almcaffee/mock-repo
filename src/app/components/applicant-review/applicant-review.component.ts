@@ -8,7 +8,6 @@ import { Observable, Subscription } from 'rxjs';
 import { WindowService } from '../../services/window.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DialogueComponent } from '../dialogue/dialogue.component';
-import 'rxjs/add/operator/map'
 
 @Component({
   selector: 'app-applicant-review',

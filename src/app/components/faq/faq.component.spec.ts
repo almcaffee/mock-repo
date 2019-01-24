@@ -11,8 +11,7 @@ import { faq } from '../../core/testing/variables';
 import { DataService } from '../../services/data.service';
 import { StepperService } from '../stepper/stepper.service';
 import { EnrollmentService } from '../../services/enrollment.service';
-import { Observable } from 'rxjs';
-import 'rxjs/add/observable/of';
+import { Observable, of } from 'rxjs';
 import { AgencyProfile, Agency, Applicant } from '../../models';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -40,7 +39,7 @@ describe('FaqComponent', () => {
     enrollmentService = fixture.debugElement.injector.get(EnrollmentService);
     router = TestBed.get(Router);
     route = TestBed.get(ActivatedRoute);
-    spyOn(dataService, 'getFaq').and.returnValue( Observable.of(faq));
+    spyOn(dataService, 'getFaq').and.returnValue( of(faq));
   });
 
   it('should create', () => {

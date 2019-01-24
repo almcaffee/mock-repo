@@ -12,8 +12,7 @@ import { applicant, searchResult, agency, faq } from '../../core/testing/variabl
 import { DataService } from '../../services/data.service';
 import { StepperService } from '../stepper/stepper.service';
 import { EnrollmentService } from '../../services/enrollment.service';
-import { Observable } from 'rxjs';
-import 'rxjs/add/observable/of';
+import { Observable, of } from 'rxjs';
 import { AgencyProfile, Agency, Applicant } from '../../models';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -88,7 +87,7 @@ describe('ApplicantReviewComponent', () => {
   });
 
   it('should get faq', () => {
-    spyOn(dataService, 'getFaq').and.returnValue( Observable.of(faq));
+    spyOn(dataService, 'getFaq').and.returnValue( of(faq));
     fixture.detectChanges();
     component.faqs = [];
     fixture.detectChanges();

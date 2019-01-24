@@ -11,8 +11,7 @@ import { DataService } from '../../services/data.service';
 import { StepperService } from '../stepper/stepper.service';
 import { EnrollmentService } from '../../services/enrollment.service';
 import { StaticDataService } from '../../services/static-data.service';
-import { Observable } from 'rxjs';
-import 'rxjs/add/observable/of';
+import { Observable, of } from 'rxjs';
 import { AgencyProfile, Agency, Applicant } from '../../models';
 /* Moment.js */
 import * as moment from 'moment';
@@ -44,7 +43,7 @@ describe('ApplicantInformationComponent', () => {
 
     spyOn(enrollmentService, 'getApplicant').and.returnValue(applicant);
     spyOn(enrollmentService, 'getAgency').and.returnValue(agency);
-    spyOn(dataService, 'getStates').and.returnValue( Observable.of({result: states}));
+    spyOn(dataService, 'getStates').and.returnValue( of({result: states}));
     spyOn(dataService, 'setRouteData').and.callThrough();
     spyOn(stepperService, 'goToPreviousStep').and.callThrough();
 

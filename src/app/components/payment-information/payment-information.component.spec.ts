@@ -11,8 +11,7 @@ import { DataService } from '../../services/data.service';
 import { StepperService } from '../stepper/stepper.service';
 import { EnrollmentService } from '../../services/enrollment.service';
 import { StaticDataService } from '../../services/static-data.service';
-import { Observable } from 'rxjs';
-import 'rxjs/add/observable/of';
+import { Observable, of } from 'rxjs';
 import { AgencyProfile, Agency, Applicant } from '../../models';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -63,8 +62,8 @@ describe('PaymentInformationComponent', () => {
     spyOn(enrollmentService, 'applicantChanged').and.returnValue(false);
     spyOn(enrollmentService, 'resetApplicant').and.returnValue(true);
     spyOn(dataService,'setRouteData').and.callThrough();
-    spyOn(dataService,'getStates').and.returnValue( Observable.of({ result: states }));
-    spyOn(dataService,'getPaymentMethods').and.returnValue( Observable.of({ result: paymentTypes }));
+    spyOn(dataService,'getStates').and.returnValue( of({ result: states }));
+    spyOn(dataService,'getPaymentMethods').and.returnValue( of({ result: paymentTypes }));
     spyOn(stepperService, 'goToPreviousStep').and.callThrough();
     spyOn(stepperService, 'completeStep').and.callThrough();
     spyOn(enrollmentService, 'setPaymentInfo').and.callThrough();

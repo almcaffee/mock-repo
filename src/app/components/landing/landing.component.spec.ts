@@ -10,8 +10,7 @@ import { DataService } from '../../services/data.service';
 import { StepperService } from '../stepper/stepper.service';
 import { EnrollmentService } from '../../services/enrollment.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import 'rxjs/add/observable/of';
+import { Observable, of } from 'rxjs';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
@@ -82,7 +81,7 @@ describe('LandingComponent', () => {
   });
 
   it('should get faq', () => {
-    spyOn(dataService, 'getFaq').and.returnValue( Observable.of(faq));
+    spyOn(dataService, 'getFaq').and.returnValue( of(faq));
     fixture.detectChanges();
     component.faqs = [];
     fixture.detectChanges();

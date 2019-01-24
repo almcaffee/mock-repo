@@ -7,7 +7,6 @@ import { Agency, AgencyProfile, Privacy, NapsApiResponse, State } from '../../mo
 import { StepperService } from '../stepper/stepper.service';
 import { EnrollmentService } from '../../services/enrollment.service';
 import { WindowService } from '../../services/window.service';
-import { MarkdownService } from 'ngx-markdown';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DialogueComponent } from '../dialogue/dialogue.component';
 
@@ -35,7 +34,6 @@ export class PrivacyComponent implements OnInit, OnDestroy {
   constructor(public dataService: DataService,
     private enrollmentService: EnrollmentService,
     private stepperService: StepperService,
-    private markdownService: MarkdownService,
     private route: ActivatedRoute,
     private router: Router,
     public windowService: WindowService,

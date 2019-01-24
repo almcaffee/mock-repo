@@ -1,8 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { PrivacyComponent } from './privacy.component';
-import { Observable, Subscription } from 'rxjs';
-import 'rxjs/add/observable/of';
+import { Observable, Subscription, of } from 'rxjs';
 import { AgencyProfile, Agency } from '../../models';
 
 import { TestImports } from '../../core/testing/imports';
@@ -13,7 +12,6 @@ import { applicant, agency, state } from '../../core/testing/variables';
 /* Imports for this test only */
 import { DataService } from '../../services/data.service';
 import { StepperService } from '../stepper/stepper.service';
-import { MarkdownService, MarkedOptions } from 'ngx-markdown';
 import { EnrollmentService } from '../../services/enrollment.service';
 
 
@@ -22,7 +20,6 @@ describe('PrivacyComponent', () => {
   let fixture: ComponentFixture<PrivacyComponent>;
   let dataService: DataService;
   let stepperService: StepperService;
-  let markdownService: MarkdownService;
   let enrollmentService: EnrollmentService;
 
   beforeEach(async(() => {
@@ -39,8 +36,7 @@ describe('PrivacyComponent', () => {
     component = fixture.componentInstance;
     dataService = fixture.debugElement.injector.get(DataService);
     stepperService = fixture.debugElement.injector.get(StepperService);
-    markdownService = fixture.debugElement.injector.get(MarkdownService);
-    enrollmentService = fixture.debugElement.injector.get(EnrollmentService); 
+    enrollmentService = fixture.debugElement.injector.get(EnrollmentService);
 
     spyOn(dataService, 'setRouteData').and.callThrough();
     spyOn(dataService, 'getStates').and.callThrough();

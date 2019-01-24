@@ -10,7 +10,6 @@ import { applicant, agency, searchResult, states, testSearch } from '../../core/
 import { DataService } from '../../services/data.service';
 import { EnrollmentService } from '../../services/enrollment.service';
 import { Observable } from 'rxjs';
-import 'rxjs/add/observable/of';
 
 describe('ApplicantSearchComponent', () => {
   let component: ApplicantSearchComponent;

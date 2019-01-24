@@ -30,7 +30,6 @@ import { MatInputModule,
   MatTooltipModule,
 } from '@angular/material';
 import { MomentDateModule, MatMomentDateModule } from '@angular/material-moment-adapter';
-import { MarkdownModule } from 'ngx-markdown';
 import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
 import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 import { AppRoutes } from '../../routes';
@@ -66,7 +65,6 @@ export const TestImports: any[] = [
   MatTableModule,
   MatTooltipModule,
   RouterTestingModule.withRoutes(AppRoutes),
-  MarkdownModule.forRoot(),
   RecaptchaModule.forRoot(),
   RecaptchaFormsModule
 ];

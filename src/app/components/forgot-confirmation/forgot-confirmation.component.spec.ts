@@ -10,7 +10,6 @@ import { applicant, applicants, agency, states, searchResult, faq, agencyService
 /* Imports for this test only */
 import { DataService } from '../../services/data.service';
 import { Observable, Subscription, timer } from 'rxjs';
-import 'rxjs/add/observable/of';
 import { AgencyProfile, Agency, Applicant } from '../../models';
 
 describe('ForgotConfirmationComponent', () => {

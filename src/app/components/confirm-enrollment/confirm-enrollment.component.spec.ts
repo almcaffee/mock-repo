@@ -12,8 +12,7 @@ import { StepperService } from '../stepper/stepper.service';
 import { EnrollmentService } from '../../services/enrollment.service';
 import { StaticDataService } from '../../services/static-data.service';
 import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
-import 'rxjs/add/observable/of';
+import { Observable, Subscription, of } from 'rxjs';
 import { AgencyProfile, Agency, Applicant } from '../../models';
 import { WindowService } from '../../services/window.service';
 
@@ -50,7 +49,7 @@ describe('ConfirmEnrollmentComponent', () => {
     spyOn(enrollmentService, 'getApplicant').and.returnValue(applicant);
     spyOn(enrollmentService, 'getAgency').and.returnValue(agency);
     spyOn(enrollmentService, 'applicantChanged').and.returnValue(false);
-    spyOn(dataService, 'getAgency').and.returnValue( Observable.of({ result: agency}));
+    spyOn(dataService, 'getAgency').and.returnValue( of({ result: agency}));
     spyOn(dataService, 'setRouteData').and.callThrough();
 
   });
