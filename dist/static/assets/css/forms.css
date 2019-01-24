@@ -1,0 +1,225 @@
+@media screen and (orientation: portrait) {
+  mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row {
+
+  }
+  mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row .mat-form-field,
+  mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row mat-form-field {
+    display: block;
+  }
+
+  mat-card .naps-enrollment-form-field-ten-percent {
+    width: 100%;
+  }
+
+  .credit-checkmark {
+    color: #43a047;
+    position: absolute;
+    right: 48px;
+    top: 0px;
+  }
+
+  .credit-warning {
+    color: #D32F2F;
+    position: absolute;
+    right: 48px;
+    top: 0px;
+  }
+
+  .credit-card-type {
+    position: absolute;
+    height: 24px;
+    right: 0px;
+    top: 0px;
+  }
+
+  .discount-style {
+    color: #43a047;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (orientation: landscape) {
+
+  .credit-checkmark {
+    color: #43a047;
+    position: absolute;
+    left: -32px;
+    top: 0px;
+  }
+
+  .discount-style {
+    color: #43a047;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    font-size: 12px;
+  }
+
+  .credit-card-type {
+    position: absolute;
+    height: 24px;
+    right: 0px;
+    top: 0px;
+  }
+
+  .credit-warning {
+    color: #D32F2F;
+    position: absolute;
+    left: -32px;
+    top: 0px;
+  }
+
+  mat-card .naps-enrollment-form-field-ten-percent {
+    width: 15% !important;
+  }
+
+  mat-card {
+    position: relative;
+  }
+
+  mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row {
+    padding: 0 6em;
+  }
+
+  mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row.naps-enrollment-form-row-read-only {
+    padding: 0;
+    width: 30%;
+  }
+
+
+  mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row .mat-form-field,
+  mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row mat-form-field {
+    display: inline-block;
+    width: 30%;
+  }
+
+  mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row .mat-form-field .mat-form-field-custom {
+    position: absolute;
+    top: -1rem;
+    left: 0;
+  }
+
+  mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row.naps-enrollment-form-row-read-only mat-form-field {
+    display: block;
+    width: 100%;
+  }
+
+  mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row.naps-enrollment-form-row-read-only {
+    display: block;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+  }
+
+  mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row .mat-form-field,
+  mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row mat-form-field {
+    margin-right: 3%;
+  }
+
+  mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row.naps-enrollment-form-row-read-only mat-form-field {
+    margin-right: 0;
+  }
+}
+
+
+.mat-card-content {
+  margin-bottom: .75em !important;
+}
+
+.mat-card-content .naps-enrollment-field-readonly {
+  color: rgba(0, 0, 0, .54) !important;
+}
+
+mat-card.naps-enrollment-form {
+
+}
+
+mat-card.naps-enrollment-form mat-card-content.naps-enrollment-site-locations .mat-list .mat-list-item {
+  height: auto;
+  margin-bottom: 1.5em;
+}
+
+mat-card.naps-enrollment-form mat-card-content.naps-enrollment-site-locations address {
+  display: block;
+}
+
+mat-card.naps-enrollment-form mat-card-content.naps-enrollment-site-locations address span {
+  font-style: normal;
+  display: block;
+}
+
+mat-card.naps-enrollment-form mat-card-content.naps-enrollment-site-locations address span:nth-of-type(1n+2) {
+  font-size: 90%;
+  color: rgba(0, 0, 0, .54) !important;
+}
+
+mat-card.naps-enrollment-form mat-card-content.naps-enrollment-site-locations address span:first-of-type {
+  font-size: 1.15em;
+}
+
+mat-card.naps-enrollment-form mat-card-content.naps-enrollment-site-locations address span span {
+  font-weight: 600;
+}
+
+mat-card.naps-enrollment-form mat-card-header mat-card-title  {
+  font-size: 1.25em !important;
+  font-weight: 700;
+}
+
+mat-card.naps-enrollment-form mat-card-header mat-card-subtitle:first-of-type {
+  color: #212121 !important;
+}
+
+mat-card.naps-enrollment-form mat-card-header mat-card-subtitle + mat-card-subtitle {
+  font-size: 75%;
+}
+
+mat-card.naps-enrollment-form mat-card-content.naps-enrollment-privacy textarea {
+  border: 0;
+  background: #f5f5f5;
+  font-weight: 500;
+  height: auto;
+  min-height: 250px;
+  max-height: 350px;
+  padding: 1rem .5rem;
+  width: Calc(100% - 1rem);
+  hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  -webkit-hyphens: none;
+}
+
+.naps-enrollment-accept-privacy mat-card-content,
+.naps-enrollment-accept-payment mat-card-content {
+  text-align: center;
+  font-weight: 700;
+}
+
+mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row.naps-enrollment-form-row-read-only {
+  color: rgba(0, 0, 0, .54) !important;
+}
+
+mat-card .naps-enrollment-form-field-read-only {
+  color: rgba(0, 0, 0, .54) !important;
+}
+
+mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row .mat-form-field .mat-form-field-custom {
+  color: rgba(0, 0, 0, .54);
+}
+
+mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row .mat-form-field .mat-form-field-custom {
+  display: block;
+}
+
+mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row .mat-form-field .mat-form-field-custom label:after {
+  content: ':';
+  margin-right: 1.75em;
+}
+
+mat-card.naps-enrollment-form mat-card-content.naps-enrollment-form-row .mat-form-field .mat-form-field-custom .mat-hint-custom {
+  margin-top: .5rem;
+  font-size: 75%;
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "1",
+    "question": "What is the NEC Applicant Processing System?",
+    "answer": "This system is used to gather information about applicants who need background checks. The NEC Applicant Processing System (NAPS) collects information relating to a paerson's background, and also assists the applicant in sending us biometric data (such as fingerprints)."
+  },
+  {
+    "id": "2",
+    "question": "How do I start?",
+    "answer": "If you are applying for the first time, click on the blue new application button on this page. if you are a returning applicant and want to change information, click on the blue review application button."
+  },
+  {
+    "id": "3",
+    "question": "What do I need to apply?",
+    "answer": "Personal and payment information are necessary to complete the application. Appropriate identification will be needed when submitting fingerprint to a fingerprint processing location."
+  },
+  {
+    "id": "4",
+    "question": "How much does an applicant cost?",
+    "answer": "Application fees are determind by the requesting agency and are diaplayed durring the enrollment process. For more information about the fees specific to your application, contact the requesting agency."
+  },
+  {
+    "id": "5",
+    "question": "How long does it take for my application to be processed?",
+    "answer": "The process varies based on the information you provide. Many factors can change the wait time. Generally, the process will take less than one month, at most. Contact your agency for more information."
+  },
+  {
+    "id": "6",
+    "question": "When will I find out my results?",
+    "answer": "After completing your application, you may search for yourself with the NEC applicant search functionality to find status about your enrollment."
+  },
+  {
+    "id": "7",
+    "question": "Where will I complete my fingerprinting",
+    "answer": "During the enrollment, the application will display fingerprinting locations. Fingerprinting locations can also be accessed after enrollment from the applicant dashboard."
+  },
+  {
+    "id": "8",
+    "question": "What forms of identification do I need to bring with me to the fingerprint location?",
+    "answer": "Valid and unexpired picture identification documents are required for fingerprinting. As a primary form of picture identification one of the following will be accepted at the GAPS Print Locations: Primary Documents include: State Issued Driver?s License with Photograph State Issued Identification Card with Photograph US Passport with Photograph US Active Duty/Retiree/Reservist Military ID Card (000 10-2) with Photograph Government Issued Employee Identification Card with Photograph (includes Federal, State, County, City, etc.) Tribal Identification Card with Photograph However, in the absence of one of the above Primary identifications, applicants may provide one or more of the following Secondary Documents, along with two of the supporting documents listed below: Secondary Documents: State Government Issued Certificate of Birth Social Security Card Certificate of Citizenship (N560) Certificate of Naturalization (N550) INS I-551 Resident Alien Card Issued since 1997 NS 1-688 Temporary Resident Identification Card INS I-688B, I-766 Employment Authorization Card Secondary Documentation must be supported by at least two of the following: Utility Bill (Including street address) Voter Registration Card Vehicle Registration Card/Title Certificate of Naturalization (N550) Current Paycheck Stub with Name and Address Cancelled Check or Bank Statement"
+  },
+  {
+    "id": "9",
+    "question": "Is a separate signed consent form required when submitting fingerprints for employment or licensing purposes?",
+    "answer": "The Georgia Crime Information Center (GCIC) does not require a separate signed consent form when submitting fingerprints for employment or licensing purposes. However, an employing/licensing agency may require signed consent from the individual for the agency?s own retention and purposes. GCIC recommends employing/licensing agencies have individuals sign an Acknowledgement Form to ensure they understand that fingerprints are necessary for the purpose of a criminal history record check and the results will help determine suitability for employment or licensing. Refer to the GAPS Applicant Waiver under Registration on the website?s main menu."
+  },
+  {
+    "id": "10",
+    "question": "Is my information safe?",
+    "answer": "NEC Applicant Processing System only shares information with an applicants selected agency and the appropriate fingerprint processing authority."
+  }
+]

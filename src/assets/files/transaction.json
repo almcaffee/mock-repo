@@ -1,0 +1,9 @@
+{
+  "transaction": {
+    "reviewingAgencyId":"GAHJ8B678",
+    "reviewingAgency":"Georgia Department of Corrections",
+    "requestingAgencyId":null,
+    "reason":"Officer Background Investigation",
+    "appliedPosition":"Corrections Officer"
+  }
+}

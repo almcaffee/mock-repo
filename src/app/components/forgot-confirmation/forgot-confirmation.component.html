@@ -1,0 +1,38 @@
+<div class="naps-enrollment-wrapper">
+  <div class="form">
+    <mat-card class="naps-enrollment-form">
+      <mat-card-header *ngIf="!linkSent">
+        <mat-card-title>Enter Applicant Information
+          <button mat-icon-button color="primary" (click)="loadTestApplicant()">
+            <mat-icon>perm_identity</mat-icon>
+          </button>
+        </mat-card-title>
+        <mat-card-subtitle>Resend confirmation to the resgistered e-mail address</mat-card-subtitle>
+        <mat-card-subtitle>* Required</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content *ngIf="!linkSent" [formGroup]="searchForm" class="naps-enrollment-form-row naps-enrollment-form-row-compact">
+        <mat-form-field *ngIf="states" class="select">
+          <mat-select formControlName="stateCode" required>
+            <mat-option *ngFor="let state of states" value="{{state.stateCode}}">{{ state.name }}</mat-option>
+          </mat-select>
+          <mat-label>State</mat-label>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput formControlName="email" placeholder="E-mail"  required>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-content *ngIf="linkSent" class="naps-continue">
+        <p>Please check your e-mail for you confirmation information.</p>
+        <button mat-raised-button [disableRipple]="true" [routerLink]="['/login']">Login</button>
+      </mat-card-content>
+    </mat-card>
+    <div *ngIf="!linkSent" [formGroup]="captchaForm" class="naps-enrollment-recaptcha">
+      <re-captcha #recaptcha formControlName="gCaptchaResponse"></re-captcha>
+    </div>
+  </div>
+  <div *ngIf="!linkSent" class="naps-enrollment-footer">
+    <button  mat-raised-button color="primary" [disableRipple]="true" [routerLink]="['/applicant-search']">Back</button>
+    <button *ngIf="!searchForm.valid || !captchaForm.valid" mat-raised-button [disabled]="true" [disableRipple]="true" class="naps-enrollment-next-step">Search</button>
+    <button *ngIf="searchForm.valid && captchaForm.valid" mat-raised-button [disableRipple]="true" color="primary" class="naps-enrollment-next-step" (click)="submitSearchForm()">Search</button>
+  </div>
+</div>

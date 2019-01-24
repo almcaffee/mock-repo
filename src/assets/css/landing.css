@@ -1,0 +1,285 @@
+@media screen and (orientation: portrait) {
+  .naps-main-image {
+    background: url('../images/home-photo-cropped-mobile-03-50percent.png') top left no-repeat;
+    background-size: cover;
+    padding: 1%;
+  }
+
+  .naps-call_to_action {
+    background: #ffffffbf;
+    margin: 2% 2%;
+    padding: 2%;
+  }
+
+  /*
+   * Heading
+   */
+
+  .naps-call_to_action-heading {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    padding: 2rem 0rem;
+  }
+
+  .naps-call_to_action-sub_heading {
+    text-align: center;
+  }
+
+  .naps-call_to_action-buttons {
+    padding: 2rem 0;
+  }
+
+  .naps_action-buttons {
+    display: inline-block !important;
+    width: 100% !important;
+    margin: 8px 0px !important;
+  }
+
+
+  /*
+   * Applicant Processing
+   */
+
+  .naps-wrapper {
+    padding-bottom: 6rem;
+  }
+
+  .naps-wrapper-single_element {
+    padding: 0rem 2.5rem;
+  }
+
+  .naps-applicant-processing-title {
+    font-size: 2rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .naps-applicant-processing-card_steps {
+  }
+
+  .naps-applicant_processing-card {
+    margin-top: 0em !important;
+  }
+
+  .naps-applicant_processing-card:not(:first-child) {
+    margin-top: 2em !important;
+  }
+
+  .naps-applicant_processing-item_adjust {
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  .naps-applicant_processing-icon_adjustment {
+    margin-left: 16px;
+    margin-right: 4px;
+    font-size: 24px;
+  }
+
+  .naps-applicant_processing-link {
+    padding: 8px;
+    margin-left: 24px;
+    font-size: 14px;
+    display: block;
+  }
+
+  .naps-applicant_processing-link:last-child {
+    padding: 8px;
+    margin-left: 24px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    display: block;
+  }
+
+  .naps-applicant_processing-faq_heading {
+    background-color: #ecec0d;
+    display: inline;
+    opacity: 0.7;
+    font-size: 1.25rem !important;
+    font-weight: 700;
+    color: #000000;
+    line-height: 44px;
+    padding: 10px;
+  }
+
+  .naps-applicant_processing-faq_sub_heading {
+    margin: 16px 0px;
+  }
+
+  .naps-applicant_processing-faq_section_column {
+    width: 100%;
+    display: inline-block !important;
+  }
+
+  .naps-applicant_processing-faq_section_link {
+    text-decoration: none;
+  }
+
+  .naps-applicant_processing-faq_section_item {
+    padding: 1rem;
+  }
+
+  .naps-applicant_processing-faq_section_item:hover {
+    background-color: #EEE;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .naps-main-image {
+    background: url('../images/home-photo-cropped-02-75percent.png') top left no-repeat;
+    background-size: cover;
+    padding: 1%;
+  }
+
+  .naps-call_to_action {
+    background: #ffffffbf;
+    margin: 2% 20%;
+    padding: 2%;
+  }
+
+  /*
+   * Heading
+   */
+
+  .naps-call_to_action-heading {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    padding: 2rem 0rem;
+  }
+
+  .naps-call_to_action-sub_heading {
+    text-align: center;
+  }
+
+  .naps-call_to_action-buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 5rem 0;
+  }
+
+  .naps_action-buttons {
+    min-width: 200px !important;
+  }
+
+
+  /*
+   * Applicant Processing
+   */
+
+  .naps-wrapper {
+    padding: 1rem 2.5rem;
+    padding-bottom: 6rem;
+  }
+
+  .naps-applicant-processing-title {
+    font-size: 2rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+
+  .naps-applicant-processing-card_steps {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .naps-applicant_processing-card {
+    width: 25%;
+    min-height: 300px !important;
+    margin-top: 0em !important;
+  }
+
+  .naps-applicant_processing-item_adjust {
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  .naps-applicant_processing-icon_adjustment {
+    margin-left: 16px;
+    margin-right: 4px;
+    font-size: 24px;
+  }
+
+  .naps-applicant_processing-link {
+    padding: 8px;
+    margin-left: 24px;
+    font-size: 14px;
+    display: block;
+  }
+
+  .naps-applicant_processing-link:last-child {
+    padding: 8px;
+    margin-left: 24px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    display: block;
+  }
+
+  .naps-applicant_processing-faq_heading {
+    background-color: #ecec0d;
+    display: inline;
+    opacity: 0.7;
+    font-size: 1.25rem !important;
+    font-weight: 700;
+    color: #000000;
+    line-height: 44px;
+    padding: 10px;
+  }
+
+  .naps-applicant_processing-faq_sub_heading {
+    margin: 16px 0px;
+  }
+
+  .naps-applicant_processing-faq_section_column {
+    width: 50%;
+    display: inline-block !important;
+  }
+
+  .naps-applicant_processing-faq_section_link {
+    text-decoration: none;
+  }
+
+  .naps-applicant_processing-faq_section_item { }
+
+  .naps-applicant_processing-faq_section_item:hover {
+    background-color: #EEE;
+  }
+}
+
+.naps-applicant_processing-link:hover,
+.naps-applicant_processing-item_adjust:hover  {
+  background: #f4f5f5;
+}
+
+.naps-applicant_processing-link .mat-icon,
+.naps-applicant_processing-item_adjust .edit-enrollment {
+  display: inline-block;
+  color: #ced7d7;
+  position: absolute;
+  right: 35px;
+}
+
+.naps-applicant_processing-link {
+  text-decoration: none;
+}
+
+.naps-applicant_processing-link .mat-icon {
+  vertical-align: middle;
+}
+
+.naps-applicant_processing-link {
+  color: #000;
+}
+
+.naps-applicant_processing-item_adjust:hover .edit-enrollment,
+/* .naps-applicant_processing-link:hover, */
+.naps-applicant_processing-link:hover .mat-icon {
+  /* color: #1565c0; */
+  color: #56aa5a;
+}

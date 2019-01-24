@@ -1,0 +1,10 @@
+<mat-horizontal-stepper [linear]="false" [selected]="currentStep" [selectedIndex]="currentStepIndex" #stepper (click)="changeSteps()">
+  <ng-container *ngFor="let s of stepperService.steps; let i = index">
+    <mat-step *ngIf="(windowService.mobile && i >= currentStepIndex - 1 && i <= currentStepIndex + 1) || !windowService.mobile" [completed]="s.completed" [editable]="s.editable">
+        <ng-template matStepLabel
+          *ngIf="(windowService.mobile && currentStepIndex === i) || !windowService.mobile">
+          {{ s.label }}
+        </ng-template>
+    </mat-step>
+  </ng-container>
+</mat-horizontal-stepper>

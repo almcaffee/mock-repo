@@ -1,0 +1,224 @@
+<div class="naps-enrollment-wrapper">
+  <div class="naps-instructions">
+    <b>Instructions:</b> Provide information about the applicant. The information will be used during the background investigation and must be accurate. Complete the form to the best of
+your ability. Contact your agency for assistance, if needed.
+  </div>
+  <form class="naps-form_top_padding-override" [formGroup]="enrollmentForm" autocomplete="on" class="responsive-form" [attr.aria-labelledby]="'Enrollement Form'">
+
+    <mat-card formGroupName="transaction" class="naps-enrollment-form">
+      <mat-card-header>
+        <mat-card-title>General Information <button mat-icon-button color="primary" (click)="demoApplicantData()"><mat-icon>perm_identity</mat-icon></button></mat-card-title>
+        <mat-card-subtitle>Review and provide general information</mat-card-subtitle>
+        <mat-card-subtitle>* Required</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="naps-enrollment-form-row naps-enrollment-form-row-read-only">
+        <mat-form-field>
+          <input matInput [readonly]="true" placeholder="Agency" value="{{agency.name}}" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [readonly]="true" formControlName="reviewingAgencyId" placeholder="Agency ID" required>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-content class="naps-enrollment-form-row">
+        <mat-form-field formGroupName="reason">
+          <mat-select formControlName="name" (selectionChange)="getReason($event.value)" required>
+            <mat-option *ngFor="let reason of agency.reasons" value="{{reason.name}}">{{ reason.name }}</mat-option>
+          </mat-select>
+          <mat-label>Reason</mat-label>
+          <mat-hint>Select why you are enrolling</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput formControlName="appliedPosition" placeholder="Position Applied For">
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-content class="naps-enrollment-form-row">
+        <mat-form-field>
+          <input matInput formControlName="requestingAgencyId" placeholder="Requesting Agency ID">
+          <mat-hint>Only needed if different from Reviewing Agency ID</mat-hint>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+
+      <mat-card formGroupName="person" class="naps-enrollment-form">
+        <mat-card-header>
+          <mat-card-title>Biographic Information</mat-card-title>
+          <mat-card-subtitle>Please let us know personal details about the applicant</mat-card-subtitle>
+          <mat-card-subtitle>* Required</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="naps-enrollment-form-row">
+          <mat-form-field>
+            <mat-select formControlName="suffix">
+              <mat-option *ngFor="let option of staticDataService.suffixOptions" value="{{option.value}}">{{ option.name }}</mat-option>
+            </mat-select>
+            <mat-label>Suffix</mat-label>
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-content class="naps-enrollment-form-row">
+          <mat-form-field>
+            <input matInput formControlName="lastName" placeholder="Last Name" required>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput formControlName="middleName" placeholder="Middle Name">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput formControlName="firstName" placeholder="First Name" required>
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-content class="naps-enrollment-form-row">
+          <mat-form-field>
+            <mat-select formControlName="stateDriversLicense">
+              <mat-option *ngFor="let state of states" value="{{state.stateCode}}">{{ state.name }}</mat-option>
+            </mat-select>
+            <mat-label>State Driver's License</mat-label>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput formControlName="driversLicenseNumber" placeholder="Driver's License #">
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-content class="naps-enrollment-form-row">
+          <mat-form-field>
+            <input matInput formControlName="dateOfBirth" placeholder="Date of Birth" required>
+            <mat-hint>Format is Month, Day, Year (MMDDYYYY)</mat-hint>
+            <mat-error *ngIf="!getDateErrorMessage('person.dateOfBirth')">Invalid Date</mat-error>
+            <mat-error *ngIf="getDateErrorMessage('person.dateOfBirth')">{{ getDateErrorMessage('person.dateOfBirth') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select formControlName="placeOfBirth" required>
+              <mat-option *ngFor="let option of staticDataService.placeOfBirthOptions" value="{{option.value}}">{{ option.name }}</mat-option>
+            </mat-select>
+            <mat-label>Place of Birth</mat-label>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select formControlName="countryOfCitizenship">
+              <mat-option *ngFor="let option of staticDataService.citizenshipOptions" value="{{option.value}}">{{ option.name }}</mat-option>
+            </mat-select>
+            <mat-label>Country of Citizenship</mat-label>
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-content class="naps-enrollment-form-row">
+          <mat-form-field>
+           <input matInput #ssn formControlName="ssn" placeholder="Social Security #">
+           <mat-hint>No dashes, 9 digits i.e. 123456789</mat-hint>
+           <mat-error *ngIf="!getMatchErrorMessage('person.ssn')">Invalid SSN</mat-error>
+           <mat-error *ngIf="getMatchErrorMessage('person.ssn')">{{ getMatchErrorMessage('person.ssn') }}</mat-error>
+         </mat-form-field>
+          <mat-form-field>
+            <input matInput #vssn id="vssn" placeholder="Re-enter SSN" (change)="updateValidation('ssn', 'person')">
+            <mat-hint>No dashes, 9 digits i.e. 123456789</mat-hint>
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card formGroupName="person" class="naps-enrollment-form">
+        <mat-card-header>
+          <mat-card-title>Physical Characteristics</mat-card-title>
+          <mat-card-subtitle>Please let us know physical details about the applicant</mat-card-subtitle>
+          <mat-card-subtitle>* Required</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="naps-enrollment-form-row">
+          <mat-form-field>
+            <mat-select formControlName="gender" required>
+              <mat-option *ngFor="let option of staticDataService.genderOptions" value="{{option.value}}">{{ option.name }}</mat-option>
+            </mat-select>
+            <mat-label>Sex</mat-label>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select formControlName="race" required>
+              <mat-option *ngFor="let option of staticDataService.raceOptions" value="{{option.value}}">{{ option.name }}</mat-option>
+            </mat-select>
+            <mat-label>Race</mat-label>
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-content class="naps-enrollment-form-row">
+          <mat-form-field>
+            <mat-select formControlName="height" required>
+              <mat-option *ngFor="let option of staticDataService.heightOptions" value="{{option.value}}">{{ option.name }}</mat-option>
+            </mat-select>
+            <mat-label>Height</mat-label>
+            <mat-hint>Imperial system units (feet, inches)</mat-hint>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="number" formControlName="weight" placeholder="Weight" required>
+            <mat-hint>Imperial system units (pounds)</mat-hint>
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-content class="naps-enrollment-form-row">
+          <mat-form-field>
+            <mat-select formControlName="eyeColor" required>
+              <mat-option *ngFor="let option of staticDataService.eyeColorOptions" value="{{option.value}}">{{ option.name }}</mat-option>
+            </mat-select>
+            <mat-label>Eye Color</mat-label>
+            <mat-hint>For multiple eye colors, choose best option</mat-hint>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select formControlName="hairColor" required>
+              <mat-option *ngFor="let option of staticDataService.hairColorOptions" value="{{option.value}}">{{ option.name }}</mat-option>
+            </mat-select>
+            <mat-label>Hair Color</mat-label>
+            <mat-hint>For multiple hair colors, choose best option</mat-hint>
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card formGroupName="person" class="naps-enrollment-form">
+        <mat-card-header>
+          <mat-card-title>Contact Information</mat-card-title>
+          <mat-card-subtitle>Provide contact information</mat-card-subtitle>
+          <mat-card-subtitle>* Required</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="naps-enrollment-form-row">
+          <mat-form-field>
+            <input matInput type="tel" formControlName="phone" placeholder="Phone Number">
+            <mat-hint>Format is a 10 digit number without any hyphens or parenthesis</mat-hint>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput #email type="email" formControlName="email" placeholder="Email Address" required>
+            <mat-hint>We use this information to send you your information</mat-hint>
+            <mat-error *ngIf="!getMatchErrorMessage('person.email')">Invalid Email</mat-error>
+            <mat-error *ngIf="getMatchErrorMessage('person.email')">{{ getMatchErrorMessage('person.email') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput #vemail id="vemail" type="email" placeholder="Confirm Email Address" (change)="updateValidation('email', 'person')" required>
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card formGroupName="address" class="naps-enrollment-form">
+        <mat-card-header>
+          <mat-card-title>Address Information</mat-card-title>
+          <mat-card-subtitle>Provide address information</mat-card-subtitle>
+          <mat-card-subtitle>* Required</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="naps-enrollment-form-row">
+          <mat-form-field>
+            <input matInput formControlName="address1" placeholder="Address" required>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput formControlName="address2" placeholder="Additional Address">
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-content class="naps-enrollment-form-row">
+          <mat-form-field>
+            <mat-select formControlName="state" required>
+              <mat-option *ngFor="let state of states" value="{{state.stateCode}}">{{ state.name }}</mat-option>
+            </mat-select>
+            <mat-label>State</mat-label>
+          </mat-form-field>
+          <mat-form-field class="col-xs-12">
+            <input matInput formControlName="city" placeholder="City" required>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput formControlName="zip" placeholder="Zip Code" required>
+            <mat-hint>Only include the first 5 digits</mat-hint>
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+  </form>
+
+  <div class="naps-enrollment-footer">
+    <button mat-raised-button [disableRipple]="true" color="primary" (click)="openDialog('cancel')">Cancel</button>
+    <a class="naps-link-button" (click)="goToPreviousStep()">Back</a>
+    <button *ngIf="!validEnrollmentForm" mat-raised-button [disabled]="true" [disableRipple]="true" class="naps-enrollment-next-step">Next</button>
+    <button *ngIf="validEnrollmentForm " mat-raised-button [disableRipple]="true" color="primary" class="naps-enrollment-next-step" (click)="submitEnrollmentForm()">Next</button>
+  </div>
+</div>

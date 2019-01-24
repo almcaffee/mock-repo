@@ -1,0 +1,68 @@
+.green_check {
+  color: #56aa5a;
+}
+
+.red_x {
+  color: #d32f2f;
+}
+
+.red_x_FFF {
+  color: #FFF;
+}
+
+.naps-application-information_heading {
+  padding: 1rem;
+}
+
+.naps-application-information-status_bar {
+  margin-top: 24px;
+  border-left: 12px solid #1665c0;
+}
+
+.naps-applicant-review_item {
+  font-weight: 400;
+  font-size: 1rem;
+  padding: 8px;
+  margin-left: 24px;
+}
+
+@media screen and (orientation: portrait) {
+  .naps-review-button_wrapper {
+    display: block;
+    padding: .75rem 1.5rem;
+  }
+
+  .naps_action-buttons {
+    display: inline-block !important;
+    width: 100% !important;
+    margin: 8px 0px !important;
+  }
+
+  .naps-application-information_section { }
+
+  .naps-applicant-review_item {
+    display: block;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .naps-review-button_wrapper {
+    display: block;
+    line-height: 1rem;
+    padding: .75rem 1.5rem;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .naps_action-buttons {
+    min-width: 200px !important;
+  }
+
+  .naps-application-information_section {
+    margin-bottom: 24px;
+  }
+
+  .naps-applicant-review_item {
+    display: inline-block;
+  }
+}

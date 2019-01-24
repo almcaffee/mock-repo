@@ -1,0 +1,59 @@
+<div class="naps-enrollment-wrapper">
+  <div class="naps-instructions">
+    <b>Instructions:</b> This page is informational and shows your available fingerprint locations near you (if the print site option is chosen). Make sure to find a location
+near you. Fingerprinting services are possible at any of the following locations, and are provided on a 'first-come-first-serve' basis.
+  </div>
+    <mat-card class="naps-enrollment-form">
+      <mat-card-header>
+        <mat-card-title>Fingerprinting Options </mat-card-title>
+        <mat-card-subtitle>Use this page to determine where yout fingerprinting will occur</mat-card-subtitle>
+        <mat-card-subtitle>* Required</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="naps-enrollment-form-row" [formGroup]="fingerPrintForm">
+        <mat-form-field>
+          <mat-select formControlName="fingerPrintCardUser" [required]="true">
+            <mat-option [value]="false">Print Site (in Person)</mat-option>
+            <mat-option [value]="true">Mail In</mat-option>
+          </mat-select>
+          <mat-label>Appointment Type</mat-label>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+    <mat-card *ngIf="fingerPrintCardUserSelected && !fingerPrintCardUser && dataSource" class="naps-enrollment-form" [class.naps-confirm-mail-in-address]="fingerPrintCardUserSelected && fingerPrintCardUser">
+      <mat-card-content>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25]" ></mat-paginator>
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Agency Name </th>
+            <td mat-cell *matCellDef="let location"> {{location.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef> Address </th>
+            <td mat-cell *matCellDef="let location"> {{location.address | addressInline }} </td>
+          </ng-container>
+          <ng-container matColumnDef="hours">
+            <th mat-header-cell *matHeaderCellDef> Hours </th>
+            <td mat-cell *matCellDef="let location"> {{location.operationHour}} </td>
+          </ng-container>
+          <ng-container matColumnDef="link">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let location"> {{location.companyWebSiteUrl || ''}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  <mat-card *ngIf="fingerPrintCardUserSelected && !fingerPrintCardUser && dataSource" class="naps-enrollment-accept-privacy">
+    <mat-card-content>
+      <mat-checkbox class="example-margin" [color]="'primary'" [disableRipple]="true" [disabled]="!fingerPrintCardUserSelected" [required]="true" [checked]="locationAccepted" (change)="toggleLocationAcceptance($event)">I have found a location that works for me. *</mat-checkbox>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="naps-enrollment-footer">
+    <button mat-raised-button [disableRipple]="true" color="primary" (click)="openDialog('cancel')">Cancel</button>
+    <a class="naps-link-button" (click)="goToPreviousStep()">Back</a>
+    <button *ngIf="!locationAccepted && !fingerPrintCardUser" mat-raised-button [disabled]="true" [disableRipple]="true" class="naps-enrollment-next-step">Next</button>
+    <button *ngIf="locationAccepted || fingerPrintCardUser" mat-raised-button [disableRipple]="true" color="primary" class="naps-enrollment-next-step" (click)="submitEnrollmentForm()">Next</button>
+  </div>
+</div>

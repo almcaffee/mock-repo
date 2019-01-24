@@ -1,0 +1,17 @@
+<div class="naps-enrollment-wrapper">
+
+  <mat-accordion *ngIf="faqs">
+    <mat-expansion-panel #panel *ngFor="let faq of faqs; let i = index" (opened)="getFaq(faq.id)" id="faq-{{ i + 1 }}">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ faq.question }}</mat-panel-title>
+      </mat-expansion-panel-header>
+       {{ faq.answer }}
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+  <div class="naps-enrollment-footer">
+    <button *ngIf="enrollmentService.applicantEnrollmentComplete" mat-raised-button [disableRipple]="true" color="primary" class="naps-enrollment-next-step" [routerLink]="['/applicant-review']">Review Enrollment</button>
+  </div>
+
+</div>

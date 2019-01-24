@@ -1,0 +1,22 @@
+@media print {
+  header,
+  footer,
+  button,
+  .naps-help-sticky-mask,
+  .naps-help-sticky,
+  .naps-app-processing,
+  .naps-menu-wrapper,
+  .naps-enrollment-steps,
+  .naps-no-print {
+    display: none !important;
+  }
+
+  .mat-card,
+  .mat-dialog-container {
+    box-shadow: none !important;
+  }
+
+  .naps-print-only {
+    display: block !important;
+  }
+}

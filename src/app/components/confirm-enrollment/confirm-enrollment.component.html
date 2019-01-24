@@ -1,0 +1,301 @@
+<div *ngIf="!enrollmentConfirmed && applicant" class="naps-enrollment-wrapper naps-confirm-only naps-read-only">
+  <mat-card class="naps-enrollment-form">
+    <mat-card-header>
+      <mat-card-title>Enrollment Review</mat-card-title>
+      <mat-card-subtitle>Review and confirm your enrollment</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+
+  <!-- General -->
+  <mat-card *ngIf="applicant.transaction" class="naps-enrollment-form">
+    <mat-card-header>
+      <mat-card-title>General Information</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="naps-enrollment-form-row naps-confirmation">
+        <div class="mat-confirm-field" *ngIf="agency">
+            <strong>Agency:</strong> {{agency.name || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Agency ID:</strong> {{applicant.transaction.reviewingAgencyId || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Requesting Agency ID:</strong> {{applicant.transaction.requestingAgencyId || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Reason:</strong> {{applicant.transaction.reason.name || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Position Applied For:</strong> {{applicant.transaction.appliedPosition || 'N/A'}}
+        </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Biographic -->
+  <mat-card *ngIf="applicant.person" class="naps-enrollment-form">
+    <mat-card-header>
+      <mat-card-title>Biographic Information</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="naps-enrollment-form-row naps-confirmation">
+        <div class="mat-confirm-field">
+            <strong>Suffix:</strong> {{applicant.person.suffix || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>First Name:</strong> {{applicant.person.firstName || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Middle Name:</strong> {{applicant.person.middleName || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Last Name:</strong> {{applicant.person.lastName || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>State Driver's License:</strong> {{applicant.person.stateDriversLicense || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Driver's License #:</strong> {{applicant.person.dirversLicenseNumber || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Date of Birth:</strong> {{applicant.person.dateOfBirth || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Place of Birth:</strong> {{applicant.person.placeOfBirth || 'N/A'}}
+        </div>
+       <div class="mat-confirm-field">
+            <strong>Country of Citizenship:</strong> {{applicant.person.countryOfCitizenship || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Social Security Number:</strong> {{applicant.person.ssn || 'N/A'}}
+        </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Physical -->
+  <mat-card *ngIf="applicant.person" class="naps-enrollment-form">
+    <mat-card-header>
+      <mat-card-title>Physical Characteristics</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="naps-enrollment-form-row naps-confirmation">
+        <div class="mat-confirm-field">
+            <strong>Sex:</strong> {{applicant.person.gender || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Race:</strong> {{applicant.person.race || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Height:</strong> {{applicant.person.height || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Weight:</strong> {{applicant.person.weight || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Eye Color:</strong> {{applicant.person.eyeColor || 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Hair Color:</strong> {{applicant.person.hairColor || 'N/A'}}
+        </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Address -->
+  <mat-card *ngIf="applicant.address" class="naps-enrollment-form">
+    <mat-card-header>
+      <mat-card-title>Address Information</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="naps-enrollment-form-row naps-confirmation">
+        <div class="mat-confirm-field">
+          <strong>Address:</strong> {{applicant.address.address1 ? applicant.address.address1 : 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Additional Address:</strong> {{applicant.address.address2 ? applicant.address.address2 : 'N/A'}}
+        </div>
+      <div class="mat-confirm-field">
+            <strong>State:</strong> {{applicant.address.state ? applicant.address.state : 'N/A'}}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>City:</strong> {{applicant.address.city ? applicant.address.city : 'N/A'}}
+        </div>
+      <div class="mat-confirm-field">
+            <strong>Zip Code:</strong> {{applicant.address.zip ? applicant.address.zip : 'N/A'}}
+        </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Contact -->
+  <mat-card *ngIf="applicant.address" class="naps-enrollment-form">
+    <mat-card-header>
+      <mat-card-title>Contact Information</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="naps-enrollment-form-row naps-confirmation">
+        <div class="mat-confirm-field">
+            <strong>Phone Number:</strong> {{ applicant.person.phone }}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>E-mail Address:</strong> {{ applicant.person.email }}
+        </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Scheduling -->
+  <mat-card *ngIf="applicant" class="naps-enrollment-form">
+    <mat-card-header>
+      <mat-card-title>Scheduling</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="naps-enrollment-form-row naps-confirmation">
+        <div class="mat-confirm-field">
+            <strong>Appointment Type:</strong> {{ mailingAddress ? 'Mail In' : 'Print Site (In Person)'}}
+        </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Payment -->
+  <mat-card *ngIf="applicant.payment" class="naps-enrollment-form">
+    <mat-card-header>
+      <mat-card-title>Payment</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="naps-enrollment-form-row naps-confirmation">
+        <div class="mat-confirm-field">
+            <strong>Payment Method:</strong> {{ applicant.payment.paymentMethod }}
+        </div>
+        <div *ngIf="applicant.payment.paymentType" class="mat-confirm-field">
+            <strong>Payment Type:</strong> {{ applicant.payment.paymentType }}
+        </div>
+        <div class="mat-confirm-field">
+            <strong>Amount to be charged:</strong> {{applicant.payment.amount | currency }}
+        </div>
+        <div *ngIf="discount" class="mat-confirm-field">
+            <strong>Discount:</strong> {{discount ? discount : 'N/A'}}
+        </div>
+        <ng-container *ngIf="applicant.payment.paymentType">
+          <div *ngIf="applicant.payment.creditCard" class="mat-confirm-field">
+            <img *ngIf="brand"
+                 class="credit-card-type"
+                 src="../../assets/images/blue-{{brand}}.png">
+              <strong>Credit Card Number:</strong> {{formattedNumber ? formattedNumber : 'N/A'}}
+          </div>
+          <div class="mat-confirm-field">
+              <strong>Address:</strong> {{applicant.payment.billingAddress.address1 || 'N/A'}}
+          </div>
+          <div class="mat-confirm-field">
+              <strong>Additional Address:</strong> {{applicant.payment.billingAddress.address2 || 'N/A'}}
+          </div>
+          <div class="mat-confirm-field">
+              <strong>State:</strong> {{applicant.payment.billingAddress.state || 'N/A'}}
+          </div>
+          <div class="mat-confirm-field">
+              <strong>City:</strong> {{applicant.payment.billingAddress.city || 'N/A'}}
+          </div>
+          <div class="mat-confirm-field">
+              <strong>Zip Code:</strong> {{applicant.payment.billingAddress.zip || 'N/A'}}
+          </div>
+        </ng-container>
+    </mat-card-content>
+  </mat-card>
+  <!-- <div *ngIf="mailingAddress" class="naps-confirm-only"> -->
+    <mat-card class="naps-enrollment-form">
+      <mat-card-header>
+        <mat-card-title>Mailing Instructions</mat-card-title>
+      </mat-card-header>
+      <mat-card-content *ngIf="mailingAddress" class="naps-enrollment-form-row naps-enrollment-mail-in">
+        <div class="mail-in">
+          <p>Applicants who are submitting ink cards for a required {{ agency.stateCode }} background check should follow the steps below</p>
+          <p><strong>Register - </strong> All applicants must be registered prior to sending hardcopy fingerprint cards. You can register on line at httgs f/www.aQs.gemalto.com Be sure to select
+            the Fingerprint Card User box. Applicants may also contact the Registration Call Center to register by phone: 1-888-XXX-XXXX</p>
+          <p><strong>Payment - </strong> Payment may be made online or a money order can be sent with your fingerprint card:</p>
+          <ul>
+            <li><em>Option 1:</em> Online Payment - Applicants may pay online at the time of registration using a crediVdebit card, or the transaction may be billed to your employer using "agency pay"</li>
+            <li><em>Option 2:</em> Send payment vvith Fingerprint Card - Money order only Cash and personal checks are not accepted</li>
+          </ul>
+          <p><strong>Registration Confirmation - </strong>All applicants will receive a Registration Confirmation. Write this number on the back of your fingerprint cards.</p>
+          <p><strong>Submission - </strong> Mail the cards (and if applicable, payment) to:</p>
+          <blockquote *ngIf="mailingAddress">
+            <address [innerText]="mailingAddress"></address>
+          </blockquote>
+          <p><strong>Results - </strong>After completing your application, you may search for yourself with the NEC applicant search functionality to find status about your enrollment.</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  <!-- </div> -->
+
+  <div class="naps-enrollment-recaptcha">
+    <re-captcha (resolved)="toggleCaptcha($event)"></re-captcha>
+  </div>
+
+</div>
+
+<div *ngIf="!enrollmentConfirmed" class="naps-enrollment-footer">
+  <button mat-raised-button [disableRipple]="true" color="primary" (click)="openDialog('cancel')">Cancel</button>
+  <a class="naps-link-button" (click)="goToPreviousStep()">Back</a>
+  <button *ngIf="!captchaConfirmed && !enrollmentComplete" mat-raised-button [disabled]="true" class="naps-enrollment-next-step">{{ enrollmentComplete ? 'Update Enrollment' : 'Confirm Enrollment'}}</button>
+  <button *ngIf="captchaConfirmed && !enrollmentComplete" mat-raised-button [disableRipple]="true" color="primary" class="naps-enrollment-next-step" (click)="confirmEnrollment()">Confirm Enrollment</button>
+  <button *ngIf="captchaConfirmed && enrollmentComplete" mat-raised-button [disableRipple]="true" color="primary" class="naps-enrollment-next-step" (click)="updateEnrollment()">Update Enrollment</button>
+</div>
+
+
+<div *ngIf="enrollmentConfirmed && applicant.confirmation" class="txt-ctr">
+<div  class="naps-enrollment-wrapper naps-confirmation-wrapper">
+  <!-- General -->
+  <!-- <mat-card class="naps-enrollment-form  naps-enrollment-successful ">
+    <mat-card-content class="naps-enrollment-form-row naps-enrollment-complete naps-no-print">
+        <p class="naps-complete-text"><mat-icon>check_circle</mat-icon> You have successfully enrolled!</p>
+    </mat-card-content>
+  </mat-card> -->
+
+  <div class="naps-enrollment-center naps-enrollment-complete">
+    <mat-card class="naps-no-print naps-enrollment-form naps-card-inline-block">
+      <mat-card-header>
+        <mat-card-title>Enrollment Successful <mat-icon>check_circle</mat-icon> </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="naps-enrollment-complete confirm">
+        <p><strong>Congratulations!</strong> You have successfully enrolled in the Applicant Processing Service.
+        Please present this receipt at your print site appointment.</p>
+        <p><strong>Status:</strong> {{ applicant.subStatus }}</p>
+        <p><strong>Confirmation:</strong> {{ applicant.confirmation }}</p>
+        <p>If you are mailing your fingerprint cards, print a copy of this receipt and include it with your fingerprint submission.</p>
+          <blockquote *ngIf="mailingAddress">
+            <label>Mail In Address:</label>
+            <address [innerHTML]="mailingAddress"></address>
+          </blockquote>
+        <p>An E-mail message with this information will be sent to <strong>{{ applicant.person.email }}</strong>.</p>
+        <p>This enrollment will expire after <strong>30 days</strong> from the enrollment date. It will be cancelled and any payment refunded at this time if the applicant has not been fingerprinted.</p>
+      </mat-card-content>
+    </mat-card>
+  <!-- </div> -->
+  <!-- <div class="naps-enrollment-center naps-enrollment-complete-confirmation">
+
+  </div> -->
+  <!-- <div class="naps-enrollment-center"> -->
+    <mat-card class="naps-enrollment-form naps-card-inline-block">
+      <mat-card-header>
+        <mat-card-title>QR Code </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="naps-enrollment-complete naps-qr">
+          <img class="naps-confirmation-qr" src="{{ 'data:image/png;base64,'+applicant.qrCode }}">
+      </mat-card-content>
+      <mat-card-content class="naps-enrollment-complete">
+          <p><strong>Agency:</strong> {{ applicant.transaction.reviewingAgency }}</p>
+          <p><strong>Last Name:</strong> {{ applicant.person.lastName }}</p>
+          <p><strong>First Name:</strong> {{ applicant.person.firstName }}</p>
+          <p><strong>Transaction Type:</strong> {{ applicant.transaction.reason.name }}</p>
+          <p><strong>Payment Type:</strong> {{ paymentDescription || '' }}</p>
+          <p><strong>Transaction Fee:</strong> {{ applicant.payment.amount | currency }}</p>
+          <p><strong>Payment Confirmation:</strong> {{ applicant.confirmation }}</p>
+          <div class="naps-enrollment-center">
+              <button mat-button color="primary" (click)="print()">Print</button>
+          </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<!--
+  <div class="naps-no-print naps-enrollment-center naps-enrollment-complete">
+  </div> -->
+</div>
+
+<div *ngIf="enrollmentConfirmed" class="naps-enrollment-footer">
+  <button mat-raised-button [disableRipple]="true" color="primary" [routerLink]="['/']">Home</button>
+  <button mat-raised-button [disableRipple]="true" color="primary" class="naps-enrollment-next-step" (click)="reviewEnrollment()">Review Enrollment</button>
+</div>

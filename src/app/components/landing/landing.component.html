@@ -1,0 +1,123 @@
+<div>
+  <div class="naps-main-image">
+    <div class="naps-call_to_action">
+      <div class="naps-call_to_action-heading">
+        <span>Complete your Background Investigation with the </span>
+        <span>NEC Applicant Processing System</span>
+      </div>
+      <div class="naps-call_to_action-sub_heading">
+        <span>Welcome to the NEC Applicant Processing System (NAPS). </span>
+        <br />
+        <span>NAPS enables you to quickly and securely enroll, submit </span>
+        <span>and review background investigation results. </span>
+      </div>
+      <div class="naps-call_to_action-buttons">
+        <button class="naps_action-buttons" mat-raised-button [disableRipple]="true" color="primary" (click)="startEnrollment()">New Applicant</button>
+        <button class="naps_action-buttons" mat-raised-button [disableRipple]="true" color="primary" [routerLink]="['/applicant-search']">Existing Applicant</button>
+      </div>
+    </div>
+  </div>
+  <div class="naps-wrapper">
+    <div class="naps-applicant-processing">
+      <div class="naps-applicant-processing-title">
+        How Applicant Processing Works
+      </div>
+      <div class="naps-applicant-processing-card_steps naps-enrollment-wrapper">
+        <mat-card class="naps-enrollment-form naps-applicant_processing-card">
+          <mat-card-header>
+            <mat-card-title>Enroll</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="naps-applicant_processing-item_adjust">
+              <mat-icon class="naps-applicant_processing-icon_adjustment">remove_circle_outline</mat-icon>
+              Applicant information
+            </div>
+            <div class="naps-applicant_processing-item_adjust">
+              <mat-icon class="naps-applicant_processing-icon_adjustment">remove_circle_outline</mat-icon>
+              Scheduling
+            </div>
+            <div class="naps-applicant_processing-item_adjust">
+              <mat-icon class="naps-applicant_processing-icon_adjustment">remove_circle_outline</mat-icon>
+              Payment Authorization
+            </div>
+            <div class="naps-applicant_processing-item_adjust">
+              <mat-icon class="naps-applicant_processing-icon_adjustment">remove_circle_outline</mat-icon>
+              Enrollment Confirmation
+            </div>
+            <div class="naps-applicant_processing-item_adjust">
+              <mat-icon class="naps-applicant_processing-icon_adjustment">create</mat-icon>
+              Update Enrollment
+            </div>
+          </mat-card-content>
+          <mat-card-footer>
+            <a class="naps-applicant_processing-link" [routerLink]="['/faq', 3]">What do I need to apply?</a>
+            <a class="naps-applicant_processing-link" [routerLink]="['/faq', 10]">Is my information safe?</a>
+            <div class="workflow-step">
+              1
+            </div>
+          </mat-card-footer>
+        </mat-card>
+        <mat-card class="naps-enrollment-form naps-applicant_processing-card">
+          <mat-card-header>
+            <mat-card-title>Fingerprint Submission</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="naps-applicant_processing-item_adjust">
+              <mat-icon class="naps-applicant_processing-icon_adjustment">person_pin</mat-icon>
+              Appointment / Mail In
+            </div>
+            <div class="naps-applicant_processing-item_adjust">
+              <mat-icon class="naps-applicant_processing-icon_adjustment">create</mat-icon>
+              Payment Confirmation
+            </div>
+            <div class="naps-applicant_processing-item_adjust">
+              <mat-icon class="naps-applicant_processing-icon_adjustment">remove_circle_outline</mat-icon>
+              Submission Success
+            </div>
+          </mat-card-content>
+          <mat-card-footer>
+            <a class="naps-applicant_processing-link" [routerLink]="['/faq', 7]">Where will I complete my fingerprinting?</a>
+            <div class="workflow-step">
+              2
+            </div>
+          </mat-card-footer>
+        </mat-card>
+        <mat-card class="naps-enrollment-form naps-applicant_processing-card">
+          <mat-card-header>
+            <mat-card-title>Background Investigation Results</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="naps-applicant_processing-item_adjust">
+              <mat-icon class="naps-applicant_processing-icon_adjustment">hourglass_full</mat-icon>
+              Review Results Status
+            </div>
+            <div class="naps-applicant_processing-item_adjust">
+              <mat-icon class="naps-applicant_processing-icon_adjustment">remove_circle_outline</mat-icon>
+              Background Check Success
+            </div>
+          </mat-card-content>
+          <mat-card-footer>
+            <a class="naps-applicant_processing-link" [routerLink]="['/faq', 6]">When will I find out my results?</a>
+            <div class="workflow-step">
+              3
+            </div>
+          </mat-card-footer>
+        </mat-card>
+      </div>
+    </div>
+    <app-applicant-search [loadedFromMainPage]="true"></app-applicant-search>
+    <div id="faq" class="naps-wrapper-single_element">
+      <div>
+        <div class="naps-applicant_processing-faq_heading">Frequently Asked Questions</div>
+      </div>
+      <div class="naps-applicant_processing-faq_sub_heading">Here are frequently asked questions related to this page.</div>
+    </div>
+    <mat-card *ngIf="faqs">
+      <mat-card-content class="naps-faq-bottom">
+       <a *ngFor="let faq of faqs; let i = index" [routerLink]="['/faq', faq.id]">
+          {{ faq.question }}
+       </a>
+     </mat-card-content>
+    </mat-card>
+  </div>
+</div>

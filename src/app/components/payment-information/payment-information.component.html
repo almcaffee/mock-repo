@@ -1,0 +1,275 @@
+<div class="naps-enrollment-wrapper">
+  <div class="naps-instructions">
+    <b>Instructions:</b> Provide your method of payment. Your agency may discount the fees assoicated with the application. Additionally, enter any required information assoicated with
+your payment method.
+  </div>
+  <form *ngIf="enrollmentForm" class="naps-form_top_padding-override" [formGroup]="enrollmentForm" autocomplete="on" class="responsive-form" [attr.aria-labelledby]="'Enrollement Form'">
+
+    <mat-card class="naps-enrollment-form">
+      <mat-card-header>
+        <mat-card-title>Payment
+          <button *ngIf="mailInPayment" mat-icon-button [disableRipple]="true" color="primary"><mat-icon>payment</mat-icon></button>
+          <ng-container *ngIf="!mailInPayment">
+              <button mat-icon-button [disableRipple]="true" color="primary"><mat-icon>payment</mat-icon></button>
+            <!-- <button mat-icon-button [disableRipple]="true" color="primary" (click)="demoApplicantData()"><mat-icon>payment</mat-icon></button> -->
+            <button *ngIf="applicant.confirmation && applicant.payment && applicant.payment.creditCard && editPayment" mat-button color="primary" class="naps-payment-right" (click)="editPaymentInfo()"><mat-icon>cancel</mat-icon> Use existing payment</button>
+            <button *ngIf="applicant.confirmation && applicant.payment && applicant.payment.creditCard && !editPayment" mat-button color="primary" class="naps-payment-right" (click)="editPaymentInfo()"><mat-icon>edit</mat-icon> Edit payment</button>
+          </ng-container>
+        </mat-card-title>
+        <mat-card-subtitle>Use this page to manage payment for your application, and enter an agency code if applicable</mat-card-subtitle>
+        <mat-card-subtitle>* Required</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content *ngIf="agency" class="naps-enrollment-form-row naps-enrollment-form-row-read-only">
+        <mat-form-field>
+          <input matInput [readonly]="true" placeholder="Agency" value="{{agency.name}}" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [readonly]="true" placeholder="Agency ID" value="{{agency.id}}" required>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-content *ngIf="selectKeys.length" class="naps-enrollment-form-row">
+        <mat-form-field>
+          <mat-select formControlName="paymentMethod" required>
+            <mat-option *ngFor="let key of selectKeys" value="{{key}}">{{ key | method }}</mat-option>
+          </mat-select>
+          <mat-label>Payment Method</mat-label>
+          <mat-hint>Pay online/in-person</mat-hint>
+        </mat-form-field>
+        <mat-form-field *ngIf="selectedPaymentMethod && selectedPaymentMethod.length">
+          <mat-select formControlName="paymentType" required>
+            <mat-option *ngFor="let type of selectedPaymentMethod" value="{{type}}">{{ type | method }}</mat-option>
+          </mat-select>
+          <mat-label>Payment Type</mat-label>
+          <mat-hint>Electronic payment types</mat-hint>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-content class="naps-enrollment-form-row">
+        <mat-form-field>
+          <input matInput placeholder="Agency Discount Code" (keydown)="checkCode($event)">
+          <span *ngIf="discountApplied" class="discount-style">${{price}} (Remaining)</span>
+          <mat-hint>You're agency provides this if it chooses to pay for some or all of the application fee.</mat-hint>
+        </mat-form-field>
+      </mat-card-content>
+      <ng-container *ngIf="!mailInPayment && !onSite">
+        <!-- Credit card form  -->
+        <ng-container *ngIf="applicant && creditCard && (!applicant.confirmation || editPayment || (applicant.confirmation && (!applicant.payment || !applicant.payment.creditCard)))">
+          <mat-card-header class="naps-card-header-block" style="padding-top: 24px;">
+            <mat-card-subtitle>Please enter your payment information below </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content formGroupName="creditCard" class="naps-enrollment-form-row">
+            <mat-form-field>
+              <input matInput formControlName="cardHolder" placeholder="Name on Card" required>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-content formGroupName="creditCard" class="naps-enrollment-form-row">
+            <mat-form-field>
+              <img *ngIf="brand"
+                   class="credit-card-type"
+                   src="../../assets/images/blue-{{brand}}.png">
+              <i *ngIf="brand"
+                 title="Credit Card Number is valid"
+                 class="material-icons credit-checkmark">
+                check_circle
+              </i>
+              <i *ngIf="!brand"
+                 title="Credit Card Number is invalid"
+                 class="material-icons credit-warning">
+                warning
+              </i>
+              <input matInput formControlName="cardNumber" placeholder="Credit Card Number" required>
+            </mat-form-field>
+            <mat-form-field class="naps-enrollment-form-field-ten-percent">
+              <input matInput formControlName="expirationDate" placeholder="Exp" required>
+              <mat-hint>MMYY</mat-hint>
+            </mat-form-field>
+            <mat-form-field class="naps-enrollment-form-field-ten-percent">
+              <input matInput formControlName="cvv" placeholder="CSV" required>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-content formGroupName="billingAddress" class="naps-enrollment-form-row">
+            <mat-form-field>
+              <input matInput formControlName="address1" placeholder="Address" required>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput formControlName="address2" placeholder="Additional Address">
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-content formGroupName="billingAddress" class="naps-enrollment-form-row">
+            <mat-form-field>
+              <mat-select formControlName="state" required>
+                <mat-option *ngFor="let state of states" value="{{state.stateCode}}">{{ state.name }}</mat-option>
+              </mat-select>
+              <mat-label>State</mat-label>
+            </mat-form-field>
+            <mat-form-field class="col-xs-12">
+              <input matInput formControlName="city" placeholder="City" required>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput formControlName="zip" placeholder="Zip Code" required>
+              <mat-hint>Only include the first 5 digits</mat-hint>
+            </mat-form-field>
+          </mat-card-content>
+        </ng-container>
+
+        <!-- E Check form -->
+        <ng-container *ngIf="applicant && eCheck && (!applicant.confirmation || editPayment || (applicant.confirmation && (!applicant.payment || !applicant.payment.eCheck)))">
+          <mat-card-header class="naps-card-header-block" style="padding-top: 24px;">
+            <mat-card-subtitle>E-Check Information</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="naps-enrollment-form-row">
+            <mat-form-field>
+              <input matInput placeholder="Account Holder Name" disabled>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-content class="naps-enrollment-form-row" disabled>
+            <mat-form-field>
+              <input matInput placeholder="Bank Routing Number" disabled>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Bank Account Number" disabled>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-content class="naps-enrollment-form-row" disabled>
+            <mat-form-field>
+              <input matInput  placeholder="Address" disabled>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="State" disabled>
+              <mat-label>State</mat-label>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-content class="naps-enrollment-form-row">
+            <mat-form-field class="col-xs-12">
+              <input matInput placeholder="City" disabled>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Zip Code" disabled>
+            </mat-form-field>
+          </mat-card-content>
+        </ng-container>
+
+        <!-- Credit card read only  -->
+        <ng-container *ngIf="applicant && creditCard && applicant.confirmation && applicant.payment && applicant.payment.creditCard && !editPayment">
+          <mat-card-header class="naps-card-header-block" style="padding-top: 24px;">
+            <mat-card-subtitle>Existing payment information</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="naps-enrollment-form-row">
+            <mat-form-field>
+              <input matInput [value]="applicant.payment.creditCard.cardHolder" [readonly]="true" placeholder="Name on Card">
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-content class="naps-enrollment-form-row">
+            <mat-form-field>
+              <img *ngIf="brand"
+                   class="credit-card-type"
+                   src="../../assets/images/blue-{{brand}}.png">
+              <i *ngIf="brand"
+                 title="Credit Card Number is valid"
+                 class="material-icons credit-checkmark">
+                check_circle
+              </i>
+              <input matInput [value]="applicant.payment.creditCard.cardNumber" [readonly]="true" placeholder="Credit Card Number">
+            </mat-form-field>
+            <mat-form-field class="naps-enrollment-form-field-ten-percent">
+              <input matInput [value]="applicant.payment.creditCard.expirationDate" [readonly]="true" placeholder="Exp">
+              <mat-hint>MMYY</mat-hint>
+            </mat-form-field>
+            <mat-form-field class="naps-enrollment-form-field-ten-percent">
+              <input matInput [value]="applicant.payment.creditCard.cvv" [readonly]="true" placeholder="CSV">
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-content class="naps-enrollment-form-row">
+            <mat-form-field>
+              <input matInput [value]="applicant.payment.billingAddress.address1" [readonly]="true" placeholder="Address">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [value]="applicant.payment.billingAddress.address2 || null" [readonly]="true" placeholder="Additional Address">
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-content class="naps-enrollment-form-row">
+            <mat-form-field>
+              <input matInput [value]="applicant.payment.billingAddress.state" [readonly]="true" placeholder="State">
+              <mat-label>State</mat-label>
+            </mat-form-field>
+            <mat-form-field class="col-xs-12">
+              <input matInput [value]="applicant.payment.billingAddress.city" [readonly]="true" placeholder="City">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [value]="applicant.payment.billingAddress.zip" [readonly]="true" placeholder="Zip Code">
+            </mat-form-field>
+          </mat-card-content>
+        </ng-container>
+
+        <!-- E Check read only -->
+        <ng-container *ngIf="applicant && eCheck && applicant.confirmation && applicant.payment && applicant.payment.echeck && !editPayment">
+          <mat-card-header class="naps-card-header-block" style="padding-top: 24px;">
+            <mat-card-subtitle>E-Check Information</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="naps-enrollment-form-row">
+            <mat-form-field>
+              <input matInput placeholder="Account Holder Name" disabled>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-content class="naps-enrollment-form-row">
+            <mat-form-field>
+              <input matInput placeholder="Bank Routing Number" disabled>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Bank Account Number" disabled>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-content class="naps-enrollment-form-row" disabled>
+            <mat-form-field>
+              <input matInput  placeholder="Address" disabled>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="State" disabled>
+              <mat-label>State</mat-label>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-content class="naps-enrollment-form-row">
+            <mat-form-field class="col-xs-12">
+              <input matInput placeholder="City" disabled>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Zip Code" disabled>
+            </mat-form-field>
+          </mat-card-content>
+        </ng-container>
+      </ng-container>
+    </mat-card>
+  </form>
+
+  <mat-card *ngIf="price" class="naps-enrollment-accept-payment">
+    <mat-card-content>
+      <mat-checkbox *ngIf="eCheck || creditCard" class="example-margin" [color]="'primary'"
+        [disabled]="(!enrollmentForm.valid && !paymentAccepted && !mailInPayment && !onSite) || (applicant.confirmation && editPayment && !enrollmentForm.valid) || eCheck"
+        [disableRipple]="true" [required]="true" [checked]="paymentAccepted" (change)="togglePaymentAcceptance($event)">
+            I understand {{ eCheck ? 'a charge in the amount of' : 'my card will be charged'}} <b><u>{{ price | currency}}</u></b> {{ mailInPayment ? 'will be debited from my bank account' : '' }} once the application is processed.
+       *</mat-checkbox>
+       <mat-checkbox *ngIf="onSite || mailInPayment" class="example-margin" [color]="'primary'"
+         [disabled]="!paymentAccepted && !enrollmentForm.touched"
+         [disableRipple]="true" [required]="true" [checked]="paymentAccepted" (change)="togglePaymentAcceptance($event)">
+           <ng-container *ngIf="onSite">
+             I understand that I will need to make a payment in the amount of <b><u>{{ price | currency}}</u></b> at the time of my fingerprinting.
+           </ng-container>
+           <ng-container *ngIf="mailInPayment">
+             I understand my money order in the amount of <b><u>{{ price | currency}}</u></b> needs to be sent in along with my fingerprint card.
+           </ng-container>
+        *</mat-checkbox>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="naps-enrollment-footer">
+    <button mat-raised-button [disableRipple]="true" color="primary" (click)="openDialog()">Cancel</button>
+    <a class="naps-link-button" (click)="goToPreviousStep()">Back</a>
+    <ng-container *ngIf="eCheck || creditCard">
+      <button *ngIf="((!paymentAccepted || !enrollmentForm.valid) && !(applicant.confirmation && !editPayment)) || eCheck" mat-raised-button [disabled]="true" [disableRipple]="true" class="naps-enrollment-next-step">{{ applicant.confirmation ? 'Save' : 'Next' }}</button>
+      <button *ngIf="(paymentAccepted && enrollmentForm.valid && !eCheck) || (applicant.confirmation && !editPayment && !eCheck)" mat-raised-button [disableRipple]="true" color="primary" class="naps-enrollment-next-step" (click)="submitEnrollmentForm()">{{ applicant.confirmation ? 'Save' : 'Next' }}</button>
+    </ng-container>
+    <ng-container *ngIf="mailInPayment || onSite">
+      <button *ngIf="!paymentAccepted" mat-raised-button [disabled]="true" [disableRipple]="true" class="naps-enrollment-next-step">Next</button>
+      <button *ngIf="paymentAccepted" mat-raised-button [disableRipple]="true" color="primary" class="naps-enrollment-next-step" (click)="submitEnrollmentForm()">Next</button>
+    </ng-container>
+  </div>
+</div>

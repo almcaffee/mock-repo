@@ -1,0 +1,60 @@
+<div class="naps-enrollment-wrapper">
+  <div class="naps-instructions ">
+    <b>Instructions:</b> We're showing you privacy policies. This includes details about your privacy rights as they relate to the agency your are assoicated with. We also require you
+    to accept these terms before you continue the application process.
+  </div>
+  <mat-card class="naps-enrollment-form">
+    <mat-card-header>
+      <mat-card-title>Application Privacy Rights</mat-card-title>
+      <mat-card-subtitle>Please enter your state, agency, and read your rights. Then, if you agree click the next button located in the bottom right corner.</mat-card-subtitle>
+      <mat-card-subtitle>* Required</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content [formGroup]="privacyForm" class="naps-enrollment-form-row">
+      <mat-form-field>
+        <mat-select formControlName="state" placeholder="{{ loadedState || 'Select State' }}" required>
+          <mat-option *ngFor="let state of states" [value]="state">
+            {{ state.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName="agency" [disabled]="!privacyForm.controls.state.value"  placeholder="{{ loadedAgency || 'Select Agency' }}" required>
+          <mat-option *ngFor="let agency of stateAgencies" [value]="agency">
+            {{ agency.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="privacy"  class="naps-enrollment-form naps-confirm-privacy">
+    <ng-container *ngIf="privacy.rights">
+      <mat-card-header>
+        <mat-card-title>Privacy Rights</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="naps-enrollment-privacy">
+        <div class="markdown" [innerHTML]="privacy.rights"></div>
+      </mat-card-content>
+    </ng-container>
+    <ng-container *ngIf="privacy.act">
+      <mat-card-header>
+        <mat-card-title>Privacy Act</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="naps-enrollment-privacy">
+        <div class="markdown" [innerHTML]="privacy.act"></div>
+      </mat-card-content>
+    </ng-container>
+  </mat-card>
+
+  <mat-card *ngIf="privacy" class="naps-enrollment-accept-privacy">
+    <mat-card-content>
+      <mat-checkbox class="example-margin" [color]="'primary'" [disabled]="!privacyForm.valid" [disableRipple]="true" [required]="true" [checked]="privacyAccepted" (change)="togglePrivacyAcceptance($event)">I have read and accepted these terms. *</mat-checkbox>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="naps-enrollment-footer">
+    <button mat-raised-button [disableRipple]="true" color="primary" (click)="openDialog()">Cancel</button>
+    <button *ngIf="!privacyAccepted" mat-raised-button [disabled]="true" [disableRipple]="true" class="naps-enrollment-next-step">Next</button>
+    <button *ngIf="privacyAccepted" mat-raised-button [disableRipple]="true" color="primary" class="naps-enrollment-next-step" (click)="next()">Next</button>
+  </div>
+</div>

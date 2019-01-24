@@ -1,0 +1,59 @@
+{
+  "id":null,
+  "confirmation":null,
+  "status":"Processing Application",
+  "transaction": {
+  	"reviewingAgencyId":"mockmvc-id-1",
+  	"reviewingAgency":"Georgia Department of Corrections",
+  	"requestingAgencyId":null,
+  	"reason":"Officer Background Investigation",
+  	"appliedPosition":"Corrections Officer"
+  },
+  "person": {
+    "lastName":"Applicant",
+    "firstName":"Test",
+    "middleName":null,
+    "suffix":null,
+    "ssn":null,
+    "dateOfBirth":"10011978",
+    "placeOfBirth":"GA",
+    "countryOfCitizenship":"US",
+    "gender":"M",
+    "race":"U",
+    "height":"602",
+    "weight":"185",
+    "eyeColor":"BLK",
+    "hairColor":"BRO",
+    "stateDriversLicense":"GA",
+    "dirversLicenseNumber":"G6588789",
+    "phone":"2603359874",
+    "email":"test.applicant@test.com"
+  },
+  "address": {
+    "address1":"12345 Any Street",
+   	"address2":null,
+  	"city":"Macon",
+   	"suite":null,
+  	"state":"GA",
+  	"zip":"00000"
+  },
+  "payment": {
+    "cash": false,
+    "paymentStatus": null,
+    "creditCard": {
+      "cardType":"Visa",
+      "cardHolder":"Test Applicant",
+  		"cardNumber":"5148875063870734",
+  		"csv":"234",
+  		"expirationDate":"0720"
+    },
+    "billingAddress": {
+      "address1":"12345 Any Street",
+     	"address2":null,
+    	"city":"Macon",
+     	"suite":null,
+    	"state":"GA",
+    	"zip":"00000"
+    }
+  }
+}

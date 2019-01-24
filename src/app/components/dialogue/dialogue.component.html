@@ -1,0 +1,45 @@
+<ng-container *ngIf="data.dialogueType === 'error' || data.dialogueType === 'delete' || data.dialogueType === 'cancel' || data.dialogueType === 'faq' || data.dialogueType === 'home' || data.dialogueType === 'mailIn'">
+  <h2 *ngIf="data.dialogueType === 'cancel'" mat-dialog-title>Are you sure you want to cancel your enrollment{{ enrollmentComplete ? ' update?' : '?' }}</h2>
+  <h2 *ngIf="data.dialogueType === 'delete'" mat-dialog-title>Are you sure you want to delete your enrollment?</h2>
+  <h2 *ngIf="data.dialogueType === 'faq'" mat-dialog-title>Are you sure you want to navigate away from this page?</h2>
+  <h2 *ngIf="data.dialogueType === 'home'" mat-dialog-title>Are you sure you want to leave this screen?</h2>
+  <h2 *ngIf="data.dialogueType === 'mailIn'" mat-dialog-title>Mail-In Confirmation</h2>
+  <h2 *ngIf="data.dialogueType === 'error'" class="error"> {{ data.error.message }} <div matTooltip="Close" class="dialog-close" (click)="continue(false)"><mat-icon>close</mat-icon></div></h2>
+  <mat-dialog-content [class.error]="data.dialogueType === 'error'">
+    <p *ngIf="data.dialogueType === 'cancel' || data.dialogueType === 'faq'">Once you leave this screen, we will cancel your enrollment {{ enrollmentComplete ? ' update.' : '. In order to enroll, you must start the process again from the start.' }}</p>
+    <p *ngIf="data.dialogueType === 'delete'">This is a destructive action. Once you delete your enrollment, you will be unable to view this application. All of the information will be removed, and you will be required to start over to complete the enrollment process.</p>
+    <p *ngIf="data.dialogueType === 'home'">Once you leave this screen, we will clear your session data. In order to see your applicant information, you must search for your applicant information again.</p>
+    <p *ngIf="data.dialogueType === 'mailIn'">Do You confirm you would like to submit ink cards in lieu of electronic fingerprint<ng-container *ngIf="feeChange && feeChange > 0"> and agree to pay the additional processing fee of  {{ feeChange | currency}}</ng-container>?</p>
+  </mat-dialog-content>
+  <mat-dialog-actions [class.error]="data.dialogueType === 'error'">
+    <button *ngIf="data.dialogueType != 'error'" mat-raised-button color="primary" (click)="continue(false)">No{{ !windowService.mobile ? ", I've changed my mind" : ''}}</button>
+    <button *ngIf="data.dialogueType === 'cancel'" mat-raised-button [disableRipple]="true" class="mat-cancel" (click)="continue(true)"><mat-icon>warning</mat-icon> Yes{{ !windowService.mobile ? ', cancel my enrollment' : ''}} {{ enrollmentComplete && !windowService.mobile ? ' update' : '' }}</button>
+    <button *ngIf="data.dialogueType === 'delete'" mat-raised-button [disableRipple]="true" [disabled]="showCaptcha" color="warn" class="naps-enrollment-next-step" (click)="continue(true)"><mat-icon>cancel</mat-icon> Yes{{ !windowService.mobile ? ', delete my enrollment' : ''}}</button>
+    <button *ngIf="data.dialogueType === 'faq'" mat-raised-button [disableRipple]="true" class="mat-cancel" (click)="continue(true)">Yes view FAQ</button>
+    <button *ngIf="data.dialogueType === 'home'" mat-raised-button [disableRipple]="true" class="mat-cancel" (click)="continue(true)">Continue</button>
+    <button *ngIf="data.dialogueType === 'mailIn'" mat-raised-button [disableRipple]="true" class="mat-cancel" (click)="continue(true)">Yes{{ !windowService.mobile ? ', I agree' : ''}}</button>
+  </mat-dialog-actions>
+</ng-container>
+
+<ng-container *ngIf="data.dialogueType === 'confirmation' && data.applicant">
+  <h2>Your confirmation number is: {{ data.applicant.confirmation }}</h2>
+  <mat-dialog-content>
+    <div class="naps-enrollment-center">
+      <img class="naps-confirmation-qr" src="{{ 'data:image/png;base64,'+data.applicant.qrCode }}">
+    </div>
+    <p><strong>Agency:</strong> {{ data.applicant.transaction.reviewingAgency }}</p>
+    <p><strong>Last Name:</strong> {{ data.applicant.person.lastName }}</p>
+    <p><strong>First Name:</strong> {{ data.applicant.person.firstName }}</p>
+    <p><strong>Transaction Type:</strong> {{ data.applicant.transaction.reason.name }}</p>
+    <p><strong>Payment Type:</strong> {{ paymentDescription | method }}</p>
+    <p><strong>Transaction Fee:</strong> {{ data.applicant.payment.amount | currency }}</p>
+    <p><strong>Payment Confirmation:</strong> {{ data.applicant.confirmation }}</p>
+    <div class="naps-enrollment-center">
+        <button mat-button color="primary" (click)="print()">Print</button>
+        <button mat-button [disabled]="true" color="primary">Download</button>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="continue(false)">Close</button>
+  </mat-dialog-actions>
+</ng-container>

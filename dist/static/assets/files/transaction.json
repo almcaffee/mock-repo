@@ -1,0 +1,41 @@
+{
+  "transaction": {
+    "reviewingAgencyId":"GAHJ8B678",
+    "reviewingAgency":"Georgia Department of Corrections",
+    "requestingAgengyId":null,
+    "reason":"Officer Background Investigation",
+    "appliedPosition":"Corrections Officer",
+    "payment": {
+      "cash":false,
+    	"paymentStatus":null,
+    	"creditCard": {
+        "cardType": null,
+    		"cardHolder": "Test Applicant",
+    		"cardNumber": "1234567890123456",
+    		"csv": "574",
+    		"expirationDate": "112021"
+      },
+    	"billingAddress": {
+        "address1":"12345 Any Street",
+       	"address2":null,
+      	"city":"Macon",
+       	"apt":null,
+      	"state":"GA",
+      	"zip":"00000",
+        "phone":"2603359874",
+        "email":"test.applicant@test.com"
+      },
+    	"shippingAddress": {
+        "address1":"12345 Any Street",
+       	"address2":null,
+      	"city":"Macon",
+       	"apt":null,
+      	"state":"GA",
+      	"zip":"00000",
+        "phone":"2603359874",
+        "email":"test.applicant@test.com"
+      },
+    "fingerPrintCardUser":true
+    }
+  }
+}

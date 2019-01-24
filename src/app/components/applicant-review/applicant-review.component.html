@@ -1,0 +1,150 @@
+<div *ngIf="applicant && !alternate" class="naps-enrollment-wrapper naps-read-only naps-no-print">
+  <div class="naps-enrollment-form naps-application-information_heading">
+    <div style="font-size: 1.25rem !important; font-weight: 700;">
+      Applicant Information
+    </div>
+    <div>
+      <div *ngIf="applicant && applicant.person" class="naps-applicant-review_item">
+          <b>Name: </b>
+          {{ applicant.person.firstName }} {{ applicant.person.lastName }}
+      </div>
+      <div *ngIf="agency" class="naps-applicant-review_item">
+          <b>Agency: </b>
+          {{ agency.name || 'N/A'}}
+      </div>
+      <div *ngIf="applicant" class="naps-applicant-review_item">
+          <b>Confirmation Number: </b>
+          {{ applicant.confirmation || 'N/A' }}
+      </div>
+    </div>
+  </div>
+
+  <mat-card class="naps-enrollment-form naps-application-information_section naps-application-information-status_bar">
+    <mat-card-content class="naps-enrollment-form-row naps-enrollment-complete naps-no-print">
+        <b><span><mat-icon class="naps-applicant_processing-icon_adjustment">assignment</mat-icon> Status: </span></b>
+        <span style="font-weight: 400;">{{ status || 'Foo Bar Baz'}}</span>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="naps-action_buttons-image naps-application-information_section">
+    <div class="naps-review-button_wrapper">
+      <button mat-raised-button [disableRipple]="true" color="primary" class="naps_action-buttons naps-enrollment-next-step" [routerLink]="['/privacy']">Update Enrollment</button>
+      <button mat-raised-button [disableRipple]="true" color="primary" class="naps_action-buttons" (click)="openDialog('confirmation')">View Confirmation Receipt</button>
+      <button mat-raised-button [disableRipple]="true" color="warn" class="naps_action-buttons" (click)="openDialog('delete')"><mat-icon class="red_x_FFF">cancel</mat-icon> Delete Enrollment</button>
+    </div>
+  </div>
+
+
+  <div class="naps-applicant-processing-card_steps naps-enrollment-wrapper"
+       style="padding-top: 0rem !important;">
+    <mat-card class="naps-enrollment-form naps-applicant_processing-card">
+      <mat-card-header>
+        <mat-card-title>Enroll</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="naps-applicant_processing-item_adjust"
+             style="cursor: pointer;"
+             (click)="goToStep('/applicant-information')">
+          <mat-icon class="naps-applicant_processing-icon_adjustment green_check">check_circle</mat-icon>
+          Applicant information
+        </div>
+        <div class="naps-applicant_processing-item_adjust"
+             style="cursor: pointer;"
+             (click)="goToStep('/fingerprinting')">
+          <mat-icon class="naps-applicant_processing-icon_adjustment green_check">check_circle</mat-icon>
+          Fingerprinting Options
+        </div>
+        <div class="naps-applicant_processing-item_adjust"
+             style="cursor: pointer;"
+             (click)="goToStep('/payment-information')">
+          <mat-icon class="naps-applicant_processing-icon_adjustment green_check">check_circle</mat-icon>
+          Payment Authorization
+        </div>
+        <div class="naps-applicant_processing-item_adjust"
+             style="cursor: pointer;"
+             (click)="goToStep('/confirm-enrollment')">
+          <mat-icon class="naps-applicant_processing-icon_adjustment green_check">check_circle</mat-icon>
+          Enrollment Confirmation
+        </div>
+        <div class="naps-applicant_processing-item_adjust"
+             style="cursor: pointer;"
+             [routerLink]="['/privacy']">
+          <mat-icon class="naps-applicant_processing-icon_adjustment">create</mat-icon>
+          Update Enrollment
+        </div>
+      </mat-card-content>
+      <mat-card-footer>
+        <a class="naps-applicant_processing-link" [routerLink]="['/faq', 3]">What do I need to apply?</a>
+        <a class="naps-applicant_processing-link" [routerLink]="['/faq', 10]">Is my information safe?</a>
+        <div class="workflow-step">
+          1
+        </div>
+      </mat-card-footer>
+    </mat-card>
+    <mat-card class="naps-enrollment-form naps-applicant_processing-card">
+      <mat-card-header>
+        <mat-card-title>Fingerprint Submission</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="naps-applicant_processing-item_adjust">
+          <mat-icon class="naps-applicant_processing-icon_adjustment">person_pin</mat-icon>
+          Appointment / Mail In
+        </div>
+        <div class="naps-applicant_processing-item_adjust">
+          <mat-icon class="naps-applicant_processing-icon_adjustment">create</mat-icon>
+          Payment Confirmation
+        </div>
+        <div class="naps-applicant_processing-item_adjust">
+          <mat-icon class="naps-applicant_processing-icon_adjustment">remove_circle_outline</mat-icon>
+          Submission Success
+        </div>
+      </mat-card-content>
+      <mat-card-footer>
+        <a class="naps-applicant_processing-link" [routerLink]="['/faq', 7]">Where will I complete my fingerprinting?</a>
+        <div class="workflow-step">
+          2
+        </div>
+      </mat-card-footer>
+    </mat-card>
+    <mat-card class="naps-enrollment-form naps-applicant_processing-card">
+      <mat-card-header>
+        <mat-card-title>Background Investigation Results</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="naps-applicant_processing-item_adjust">
+          <mat-icon class="naps-applicant_processing-icon_adjustment">hourglass_full</mat-icon>
+          Review Results Status
+        </div>
+        <div class="naps-applicant_processing-item_adjust">
+          <mat-icon class="naps-applicant_processing-icon_adjustment">remove_circle_outline</mat-icon>
+          Background Check Success
+        </div>
+      </mat-card-content>
+      <mat-card-footer>
+        <a class="naps-applicant_processing-link" [routerLink]="['/faq', 6]">When will I find out my results?</a>
+        <div class="workflow-step">
+          3
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+
+  <div id="faq" class="naps-wrapper-single_element">
+    <div>
+      <div class="naps-applicant_processing-faq_heading">Frequently Asked Questions</div>
+    </div>
+    <div class="naps-applicant_processing-faq_sub_heading">Here are frequently asked questions related to this page.</div>
+  </div>
+  <mat-card *ngIf="faqs">
+    <mat-card-content class="naps-faq-bottom">
+     <a *ngFor="let faq of faqs; let i = index" [routerLink]="['/faq', faq.id]">
+        {{ faq.question }}
+     </a>
+   </mat-card-content>
+  </mat-card>
+
+  <div class="naps-enrollment-footer">
+    <button mat-raised-button [disableRipple]="true" color="primary" (click)="openDialog('home')">Exit</button>
+  </div>
+
+</div>

@@ -1,0 +1,62 @@
+<div *ngIf="processing" class="naps-processing">
+  <mat-spinner></mat-spinner>
+</div>
+
+<header class="naps-header">
+  <div class="naps-header-row">
+    <div id="google_translate_element"></div>
+  </div>
+  <div class="naps-header-row">
+    <span><img src="./assets/images/nec-logo-wht.png" class="naps-nec-logo" (click)="homeClicked()"></span>
+    <span>Applicant Processing System</span>
+  </div>
+</header>
+<section class="naps-app">
+  <div *ngIf="openMenu" class="naps-menu-wrapper">
+    <h2 class="naps-menu-title">General Information
+        <mat-icon *ngIf="openMenu" (click)="toggleMenu()">arrow_left</mat-icon>
+    </h2>
+    <ul class="naps-menu-list">
+      <li><button mat-button [disableRipple]="true" (click)="homeClicked()"><mat-icon>home</mat-icon>Home</button></li>
+      <li><button mat-button [disableRipple]="true" [routerLink]="['/faq']"><mat-icon>help</mat-icon>FAQ</button></li>
+      <!-- <li><button mat-button [disableRipple]="true" ><mat-icon>place</mat-icon>Print Sites</button></li>
+      <li><button mat-button [disableRipple]="true" ><mat-icon>info</mat-icon>About</button></li> -->
+    </ul>
+  </div>
+  <div *ngIf="openMenu" class="naps-menu-wrapper-mask"></div>
+  <div class="naps-app-wrapper">
+    <div class="naps-app-processing">
+      <button mat-icon-button role="button" [disableRipple]="true" (click)="toggleMenu()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <h2>{{ header }}</h2>
+    </div>
+    <!-- <div class="naps-app-progress">
+      <h3>{{ enrollmentHeadline }}</h3>
+    </div> -->
+    <div *ngIf="stepper" class="naps-enrollment-steps">
+      <app-stepper></app-stepper>
+    </div>
+    <div class="naps-enrollment-container" [class.naps-enrollment-enroll]="stepper">
+      <div class="naps-enrollment-top-anchor"></div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</section>
+<div class="naps-help-sticky-mask"></div>
+<div class="naps-help-sticky" (click)="goToFaq()">
+  <div class="naps-help-sticky-text-wrapper">
+    <div class="naps-help-sticky-text-container">
+      <span class="naps-help-sticky-text">FAQ
+        <mat-icon style="-webkit-transform: rotate(270deg);
+                         -moz-transform: rotate(270deg);
+                         filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);">arrow_drop_down
+       </mat-icon
+       ></span>
+    </div>
+  </div>
+</div>
+<footer class="naps-footer" [class.naps-enrollment-open-menu]="openMenu">
+  <span class="naps-about-porduct">A Product brought to you by NEC</span>
+  <span class="naps-copyright">Copyright {{copyrightYear}}. NEC Corporation. All Rights Reserved</span>
+</footer>

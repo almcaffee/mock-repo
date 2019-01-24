@@ -1,0 +1,36 @@
+<div class="naps-enrollment-wrapper">
+  <form [formGroup]="searchForm" autocomplete="on" class="responsive-form" [attr.aria-labelledby]="'Enrollement Form'">
+    <mat-card class="naps-enrollment-form">
+      <mat-card-header>
+        <mat-card-title>Applicant Search
+          <button mat-icon-button color="primary" (click)="loadTestApplicant()">
+            <mat-icon>perm_identity</mat-icon>
+          </button>
+        </mat-card-title>
+        <mat-card-subtitle>Search for your information</mat-card-subtitle>
+        <mat-card-subtitle>* Required</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="naps-enrollment-form-row naps-enrollment-form-row-compact">
+        <mat-form-field *ngIf="states" class="select">
+          <mat-select formControlName="stateCode" required>
+            <mat-option *ngFor="let state of states" value="{{state.stateCode}}">{{ state.name }}</mat-option>
+          </mat-select>
+          <mat-label>State</mat-label>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput formControlName="confirmation" placeholder="Confirmation Number" required>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+    <div class="naps-enrollment-recaptcha">
+      <re-captcha #recaptcha formControlName="gCaptchaResponse"></re-captcha>
+    </div>
+  </form>
+
+  <div class="naps-enrollment-footer">
+    <button *ngIf="!loadedFromMainPage" mat-raised-button [disableRipple]="true" color="primary" [routerLink]="['/']">Cancel</button>
+    <button *ngIf="!searchForm.valid" mat-raised-button [disabled]="true" [disableRipple]="true" class="naps-enrollment-next-step">Search</button>
+    <button *ngIf="searchForm.valid" mat-raised-button [disableRipple]="true" color="primary" class="naps-enrollment-next-step" (click)="submitSearchForm()">Search</button>
+    <button mat-raised-button [disableRipple]="true" color="primary" [class.naps-enrollment-next-step]="!loadedFromMainPage == true" [routerLink]="['/forgot']">Forgot Confirmation</button>
+  </div>
+</div>
